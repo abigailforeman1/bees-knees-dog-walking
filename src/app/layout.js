@@ -1,15 +1,22 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Dongle } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dongle = Dongle({
+  variable: "--font-dongle",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const riggle = localFont({
+  src: '../../public/riggle.ttf',
+  variable: '--font-custom'
+})
+
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata = {
   title: "Create Next App",
@@ -20,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${riggle.variable} ${dongle.variable} antialiased bg-[#50B175]`}
       >
         {children}
       </body>
