@@ -1,4 +1,5 @@
 import { Dongle } from "next/font/google";
+import { Fredoka } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
 
@@ -13,10 +14,11 @@ const riggle = localFont({
   variable: '--font-custom'
 })
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
+  weight: "400",
+  subsets: ["latin"],
+})
 
 export const metadata = {
   title: "Create Next App",
@@ -27,7 +29,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${riggle.variable} ${dongle.variable} antialiased bg-[#50B175]`}
+        className={`${riggle.variable} ${dongle.variable} ${fredoka.variable} antialiased bg-blue`}
       >
         {children}
       </body>
