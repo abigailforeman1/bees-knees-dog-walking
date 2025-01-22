@@ -2,19 +2,188 @@
 import { useState, useRef, useEffect } from "react";
 import Matter from 'matter-js';
 import PolyDecomp from 'poly-decomp';
-import NextImage from "next/image";
-import StarSvg from './assets/star.js';
-import BoneSvg from './assets/bone.js';
-import HeartSvg from "./assets/heart.js";
-import PoodleSvg from "./assets/poodle.js";
-import BowlSvg from "./assets/bowl.js";
+// import { useWindowDimensions } from "@/app/functions/useWindowDimension";
 
 export default function Home() {
-  const [showInfoModal, updateShowInfoModal] = useState(false);
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: undefined,
+    height: undefined,
+  });
+  console.log(windowDimensions)
+  const [currentDevice, updateCurrentDevice] = useState("desktop");
+  console.log(currentDevice)
   const boxRef = useRef(null);
   const canvasRef = useRef(null);
 
+  const desktopShapeProps = {
+    heart: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.4,
+      yScale: 0.4,
+    }],
+    star: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.3,
+      yScale: 0.3,
+    }],
+    bowl: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    kennel: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    bone: [{
+      x: 100,
+      y: 100,
+      xScale: 0.4,
+      yScale: 0.4,
+    }],
+    smallDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.3,
+      yScale: 0.3,
+    }],
+    mediumDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.3,
+      yScale: 0.3,
+    }],
+    bigDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.4,
+      yScale: 0.4,
+    }]
+  };
+  const tabletShapeProps = {
+    heart: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    star: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    bowl: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    kennel: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    bone: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    smallDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    mediumDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    bigDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }]
+  };
+  const mobileShapeProps = {
+    heart: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    star: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    bowl: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    kennel: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    bone: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    smallDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    mediumDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    bigDog: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }]
+  };
+
   useEffect(() => {
+    let grassHeight = document.getElementById('grass').offsetHeight;
+
     // module aliases
     let Engine = Matter.Engine;
     let Render = Matter.Render;
@@ -23,8 +192,8 @@ export default function Home() {
     let MouseConstraint = Matter.MouseConstraint;
     let Mouse = Matter.Mouse;
     let Composite = Matter.Composite;
+    let Composites = Matter.Composites;
     let Common = Matter.Common;
-    let Vertices = Matter.Vertices;
 
     // provide concave decomposition support library
     Common.setDecomp(PolyDecomp);
@@ -32,10 +201,6 @@ export default function Home() {
     // create an engine
     let engine = Engine.create();
     let world = engine.world;
-
-    let footerHeight = document.getElementById('footer').offsetHeight;
-    let navHeight = document.getElementById('nav').offsetHeight;
-    let mainHeight = document.getElementById('main').offsetHeight;
 
     // create a renderer
     let render = Render.create({
@@ -67,7 +232,7 @@ export default function Home() {
           fillStyle: "#0000",
         }
       }),
-      Bodies.rectangle(window.innerWidth / 2, window.innerHeight - footerHeight, window.innerWidth, 10, {
+      Bodies.rectangle(window.innerWidth / 2, window.innerHeight - grassHeight, window.innerWidth, 10, {
         isStatic: true, render: {
           fillStyle: "#0000",
         }
@@ -76,27 +241,115 @@ export default function Home() {
       Bodies.rectangle(-6, window.innerWidth / 2, 10, window.innerWidth, { isStatic: true })
     ]);
 
-    // create two boxes and a ground
-    let heart = Vertices.fromPath(HeartSvg);
-    let bone = Vertices.fromPath(BoneSvg);
-    let star = Vertices.fromPath(StarSvg);
-    let poodle = Vertices.fromPath(PoodleSvg);
-    let bowl = Vertices.fromPath(BowlSvg);
-    let heart2 = Vertices.fromPath(HeartSvg);
+    // Composites.stack(x, y, columns, rows, columnGap, rowGap, callback)
+    var stack = Composites.stack((window.innerWidth / 10), 0, 8, 1, 20, 0, function (x, y, i) {
+      if (i === 1) {
+        return Bodies.rectangle(x, y, desktopShapeProps.smallDog[0].x, desktopShapeProps.smallDog[0].y, {
+          frictionStatic: 1,
+          restitution: 0.9,
+          render: {
+            sprite: {
+              texture: "./smallDog.png",
+              xScale: desktopShapeProps.smallDog[0].xScale,
+              yScale: desktopShapeProps.smallDog[0].yScale
+            }
+          }
+        })
+      } else if (i === 3) {
+        return Bodies.rectangle(x, y, desktopShapeProps.mediumDog[0].x, desktopShapeProps.mediumDog[0].y, {
+          // friction: 0.8,
+          frictionStatic: 1,
+          restitution: 0.8,
+          render: {
+            sprite: {
+              texture: "./mediumDog.png",
+              xScale: desktopShapeProps.mediumDog[0].xScale,
+              yScale: desktopShapeProps.mediumDog[0].yScale
+            }
+          }
+        })
+      } else if (i === 6) {
+        return Bodies.rectangle(x, y, desktopShapeProps.bigDog[0].x, desktopShapeProps.bigDog[0].y, {
+          // friction: 0.8,
+          frictionStatic: 1,
+          restitution: 0.4,
+          render: {
+            sprite: {
+              texture: "./bigDog.png",
+              xScale: desktopShapeProps.bigDog[0].xScale,
+              yScale: desktopShapeProps.bigDog[0].yScale
+            }
+          }
+        })
+      }
+      const randomNumber = Math.random()
 
-    ([heart, bone, star, poodle, bowl, heart2]).forEach(function (path, i) {
-      var color = Common.choose(['#e84242', '#FF7335', '#FCB0A6', '#5F5789', "#E0BB07"]);
-      var vertexSets = Vertices.scale(path, 0.5, 0.5);
-
-      Composite.add(world, Bodies.fromVertices((window.innerWidth / 4) + i * 150, 50 + i * 50, vertexSets, {
-        render: {
-          fillStyle: color,
-          strokeStyle: color,
-          lineWidth: 1
-        }
-      }, true));
-
+      if (randomNumber > 0.85) {
+        return Bodies.circle(x, y, desktopShapeProps.heart[0].r, {
+          frictionStatic: 1,
+          restitution: 0.7,
+          render: {
+            sprite: {
+              texture: "./heart.png",
+              xScale: desktopShapeProps.heart[0].xScale,
+              yScale: desktopShapeProps.heart[0].yScale
+            }
+          }
+        })
+      } else if (randomNumber > 0.65) {
+        return Bodies.circle(x, y, desktopShapeProps.star[0].r, {
+          frictionStatic: 1,
+          restitution: 0.8,
+          render: {
+            sprite: {
+              texture: "./star.png",
+              xScale: desktopShapeProps.star[0].xScale,
+              yScale: desktopShapeProps.star[0].yScale
+            }
+          }
+        })
+      }
+      else if (randomNumber > 0.45) {
+        return Bodies.rectangle(x, y, desktopShapeProps.bowl[0].x, desktopShapeProps.bowl[0].y, {
+          frictionStatic: 1,
+          restitution: 0.7,
+          render: {
+            sprite: {
+              texture: "./bowl.png",
+              xScale: desktopShapeProps.bowl[0].xScale,
+              yScale: desktopShapeProps.bowl[0].yScale
+            }
+          }
+        })
+      }
+      else if (randomNumber > 0.25) {
+        return Bodies.rectangle(x, y, desktopShapeProps.kennel[0].x, desktopShapeProps.kennel[0].y, {
+          frictionStatic: 1,
+          restitution: 0.3,
+          render: {
+            sprite: {
+              texture: "./kennel.png",
+              xScale: desktopShapeProps.kennel[0].xScale,
+              yScale: desktopShapeProps.kennel[0].yScale
+            }
+          }
+        })
+      } else {
+        return Bodies.rectangle(x, y, desktopShapeProps.bone[0].x, desktopShapeProps.bone[0].y, {
+          frictionStatic: 1,
+          restitution: 0.7,
+          render: {
+            sprite: {
+              texture: "./bone.png",
+              xScale: desktopShapeProps.bone[0].xScale,
+              yScale: desktopShapeProps.bone[0].yScale
+            }
+          }
+        })
+      }
     });
+
+    Composite.add(engine.world, stack);
 
     // add mouse control
     var mouse = Mouse.create(render.canvas),
@@ -116,77 +369,30 @@ export default function Home() {
     // keep the mouse in sync with rendering
     render.mouse = mouse;
 
-  }, []);
+  }, [desktopShapeProps.bigDog, desktopShapeProps.bone, desktopShapeProps.bowl, desktopShapeProps.heart, desktopShapeProps.kennel, desktopShapeProps.mediumDog, desktopShapeProps.smallDog, desktopShapeProps.star]);
 
-  function handleInfoClick() {
-    updateShowInfoModal(true);
-  }
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+      updateCurrentDevice(window.innerWidth < 767 ? "mobile" : window.innerWidth < 1024 ? "tablet" : "desktop")
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [setWindowDimensions]);
 
   return (
-    <>
-      <div className="flex flex-col items-center min-h-screen" style={{ height: "100vh" }}>
-
-        <nav id="nav" className="font-[family-name:var(--font-dongle)] font-bold">
-          <h1 className="text-green text-xl">BEE&apos;S KNEES DOG WALKING</h1>
-        </nav>
-
-        <div id="footer" style={{ zIndex: 10 }} className="flex flex-wrap justify-center text-l font-bold gap-20 font-[family-name:var(--font-dongle)] absolute bottom-0">
-          <a
-            className="flex items-center gap-2 text-yellow hover:rotate-10"
-            href="mailto:willowweebs1963@icloud.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Contact
-          </a>
-          <a
-            className="flex items-center gap-2 text-purple hover:rotate-10"
-            href="https://www.instagram.com/beeskneesbyjo/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Follow
-          </a>
-          <button
-            className="flex items-center gap-2 text-orange hover:rotate-10"
-            onClick={handleInfoClick}
-          >
-            Info
-          </button>
+    <div className="flex flex-col items-center min-h-screen font-[family-name:var(--font-fredoka)]" style={{ height: "100vh" }}>
+      <main id="main" className="w-full h-full absolute">
+        {/* CANVAS */}
+        <div id="canvasContainer" ref={boxRef} className="w-full h-full">
+          <canvas ref={canvasRef} />
         </div>
-
-
-        {showInfoModal && (
-          <div className="bg-pink w-3/4 h-4/5 text-purple text-sm leading-9 font-[family-name:var(--font-custom)] relative">
-            <button className="mt-2 mr-3 text-base right-0 absolute w-auto hover:text-stroke-purple hover:text-stroke-2 hover:text-[#0000]" onClick={() => updateShowInfoModal(false)}>x
-            </button>
-            <div className="flex items-center justify-center p-9 gap-6 h-full">
-              <div className="flex flex-col align-center"><p className="mb-1">Hi, I’m Jo.</p>
-                <p>I’ve been walking dogs for <span className="text-pink bg-purple p-1">15 years</span> around the <span className="text-pink bg-purple p-1">Medway towns</span> in Kent. I&apos;m a local dog walker offering a one-to-one service to ensure your dog has the <span className="text-pink bg-purple p-1">best walk possible.</span> I also provide a multi-visit service if you’re away for the weekend where I can <span className="text-pink bg-purple p-1">feed,</span> <span className="text-pink bg-purple p-1">walk,</span> <span className="text-pink bg-purple p-1">play</span> and keep your pet <span className="text-pink bg-purple p-1">company</span> up to 4 times a day. I am unable to take on dangerous breeds and very large dogs. <span className="text-pink bg-purple p-1">Thank you!</span></p>
-              </div>
-              <NextImage
-                src="/beesKnees.png"
-                alt="bees knees with Mishka the dog"
-                width={300}
-                height={300}
-                priority
-              />
-            </div>
-          </div>
-        )
-        }
-
-        <main id="main" className="w-full h-full absolute">
-          {/* CANVAS */}
-          <div ref={boxRef} className="w-full h-full">
-            <canvas ref={canvasRef} />
-          </div>
-        </main >
-
-        <footer className="absolute bottom-3 left-3 text-purple font-sans font-bold">
-          <p className="text-sm">© Bee&apos;s Knees 2025</p>
-        </footer>
-      </div >
-    </>
+      </main >
+    </div >
   );
 }

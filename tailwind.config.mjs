@@ -20,10 +20,13 @@ export default {
       },
     },
     fontSize: {
-      sm: "11px",
-      base: '40px',
-      l: '75px',
-      xl: '160px',
+      xs: "11px",
+      sm: "20px",
+      base: '26px',
+      l: '40px',
+      xl: '60px',
+      "2xl": "70px",
+      "3xl": "90px"
     },
     rotate: {
       'm5': "-5deg",

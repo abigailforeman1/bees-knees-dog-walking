@@ -2,6 +2,8 @@ import { Dongle } from "next/font/google";
 import { Fredoka } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
+import NextImage from "next/image";
+import Link from 'next/link'
 
 const dongle = Dongle({
   variable: "--font-dongle",
@@ -29,9 +31,50 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${riggle.variable} ${dongle.variable} ${fredoka.variable} antialiased bg-blue`}
+        className={`${riggle.variable} ${dongle.variable} ${fredoka.variable} antialiased bg-blue font-[family-name:var(--font-fredoka)]`}
       >
+        <header id="nav" className="flex justify-center w-full font-bold absolute top-0">
+          <h1 className="m-4 text-center text-green text-l sm:text-l md:text-xl lg:text-2xl xl:text-3xl">BEE&apos;S KNEES DOG WALKING</h1>
+        </header>
         {children}
+
+        <NextImage
+          id="grass"
+          src="/grass.svg"
+          className="absolute bottom-0 w-full"
+          alt="grass"
+          width={1440}
+          height={158}
+          priority
+        // onDragStart={() => { return false }}
+        />
+
+        <footer id="footer" style={{ zIndex: 10 }} className="flex flex-wrap justify-center text-base sm:text-base md:text-base lg:text-l xl:text-l font-bold gap-5 sm:gap-5 md:gap-10 lg:gap-15 xl:gap-20 absolute bottom-3 w-full">
+          <Link className="hover:rotate-10" href={"/"}>{<NextImage
+            src="/kennel.png"
+            alt="home"
+            width={60}
+            height={50}
+            priority
+          />}
+          </Link>
+
+          <Link className="flex items-center gap-2 text-yellow hover:rotate-10" href={"/contact"}>{"contact"}</Link>
+
+          <a
+            className="flex items-center gap-2 text-purple hover:rotate-10"
+            href="https://www.instagram.com/beeskneesbyjo/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            follow
+          </a>
+          <Link className="flex items-center gap-2 text-pink hover:rotate-10" href={"/info"}>{"info"}</Link>
+        </footer>
+
+        <div className="absolute bottom-3 left-3 text-purple font-sans font-bold">
+          <p className="text-xs">© Bee&apos;s Knees 2025</p>
+        </div>
       </body>
     </html>
   );
