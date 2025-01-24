@@ -20,8 +20,8 @@ export default function Home() {
       x: 100,
       y: 100,
       r: 100,
-      xScale: 0.4,
-      yScale: 0.4,
+      xScale: 0.3,
+      yScale: 0.3,
     }],
     star: [{
       x: 100,
@@ -42,11 +42,17 @@ export default function Home() {
       xScale: 0.5,
       yScale: 0.5,
     }],
+    ball: [{
+      x: 100,
+      y: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
     bone: [{
       x: 100,
       y: 100,
-      xScale: 0.4,
-      yScale: 0.4,
+      xScale: 0.2,
+      yScale: 0.2,
     }],
     smallDog: [{
       x: 100,
@@ -75,6 +81,12 @@ export default function Home() {
       x: 100,
       y: 100,
       r: 100,
+      xScale: 0.5,
+      yScale: 0.5,
+    }],
+    ball: [{
+      x: 100,
+      y: 100,
       xScale: 0.5,
       yScale: 0.5,
     }],
@@ -132,6 +144,12 @@ export default function Home() {
       r: 100,
       xScale: 0.5,
       yScale: 0.5,
+    }],
+    ball: [{
+      x: 100,
+      y: 100,
+      xScale: 0.4,
+      yScale: 0.4,
     }],
     star: [{
       x: 100,
@@ -249,7 +267,7 @@ export default function Home() {
           restitution: 0.9,
           render: {
             sprite: {
-              texture: "./smallDog.png",
+              texture: "./smallDog-paper.png",
               xScale: desktopShapeProps.smallDog[0].xScale,
               yScale: desktopShapeProps.smallDog[0].yScale
             }
@@ -262,7 +280,7 @@ export default function Home() {
           restitution: 0.8,
           render: {
             sprite: {
-              texture: "./mediumDog.png",
+              texture: "./mediumDog-paper.png",
               xScale: desktopShapeProps.mediumDog[0].xScale,
               yScale: desktopShapeProps.mediumDog[0].yScale
             }
@@ -275,7 +293,7 @@ export default function Home() {
           restitution: 0.4,
           render: {
             sprite: {
-              texture: "./bigDog.png",
+              texture: "./bigDog-paper.png",
               xScale: desktopShapeProps.bigDog[0].xScale,
               yScale: desktopShapeProps.bigDog[0].yScale
             }
@@ -290,7 +308,7 @@ export default function Home() {
           restitution: 0.7,
           render: {
             sprite: {
-              texture: "./heart.png",
+              texture: "./heart-paper.png",
               xScale: desktopShapeProps.heart[0].xScale,
               yScale: desktopShapeProps.heart[0].yScale
             }
@@ -302,7 +320,7 @@ export default function Home() {
           restitution: 0.8,
           render: {
             sprite: {
-              texture: "./star.png",
+              texture: "./star-paper.png",
               xScale: desktopShapeProps.star[0].xScale,
               yScale: desktopShapeProps.star[0].yScale
             }
@@ -315,7 +333,7 @@ export default function Home() {
           restitution: 0.7,
           render: {
             sprite: {
-              texture: "./bowl.png",
+              texture: "./bowl-paper.png",
               xScale: desktopShapeProps.bowl[0].xScale,
               yScale: desktopShapeProps.bowl[0].yScale
             }
@@ -328,9 +346,22 @@ export default function Home() {
           restitution: 0.3,
           render: {
             sprite: {
-              texture: "./kennel.png",
+              texture: "./kennel-paper.png",
               xScale: desktopShapeProps.kennel[0].xScale,
               yScale: desktopShapeProps.kennel[0].yScale
+            }
+          }
+        })
+      }
+      else if (randomNumber > 0.15) {
+        return Bodies.rectangle(x, y, desktopShapeProps.ball[0].x, desktopShapeProps.ball[0].y, {
+          frictionStatic: 1,
+          restitution: 0.3,
+          render: {
+            sprite: {
+              texture: "./ball-paper.png",
+              xScale: desktopShapeProps.ball[0].xScale,
+              yScale: desktopShapeProps.ball[0].yScale
             }
           }
         })
@@ -340,7 +371,7 @@ export default function Home() {
           restitution: 0.7,
           render: {
             sprite: {
-              texture: "./bone.png",
+              texture: "./bone-paper2.png",
               xScale: desktopShapeProps.bone[0].xScale,
               yScale: desktopShapeProps.bone[0].yScale
             }

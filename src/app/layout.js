@@ -40,7 +40,8 @@ export default function RootLayout({ children }) {
 
         <NextImage
           id="grass"
-          src="/grass.svg"
+          src="/grass-paper2.png"
+          style={{height: "120px", bottom:"-2px"}}
           className="absolute bottom-0 w-full"
           alt="grass"
           width={1440}
@@ -51,7 +52,7 @@ export default function RootLayout({ children }) {
 
         <footer id="footer" style={{ zIndex: 10 }} className="flex flex-wrap justify-center text-base sm:text-base md:text-base lg:text-l xl:text-l font-bold gap-5 sm:gap-5 md:gap-10 lg:gap-15 xl:gap-20 absolute bottom-3 w-full">
           <Link className="hover:rotate-10" href={"/"}>{<NextImage
-            src="/kennel.png"
+            src="/kennel-paper.png"
             alt="home"
             width={60}
             height={50}
