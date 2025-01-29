@@ -1,17 +1,13 @@
 'use client';
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Matter from 'matter-js';
 import PolyDecomp from 'poly-decomp';
-// import { useWindowDimensions } from "@/app/functions/useWindowDimension";
+import useWindowDimensions from "@/app/hooks/useWindowDimension";
+import NextImage from "next/image";
+import Link from 'next/link'
 
 export default function Home() {
-  const [windowDimensions, setWindowDimensions] = useState({
-    width: undefined,
-    height: undefined,
-  });
-  console.log(windowDimensions)
-  const [currentDevice, updateCurrentDevice] = useState("desktop");
-  console.log(currentDevice)
+  const { windowDimensions, currentDevice } = useWindowDimensions();
   const boxRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -23,30 +19,37 @@ export default function Home() {
       xScale: 0.3,
       yScale: 0.3,
     }],
+    flower: [{
+      x: 100,
+      y: 100,
+      r: 100,
+      xScale: 0.2,
+      yScale: 0.2,
+    }],
     star: [{
       x: 100,
       y: 100,
       r: 100,
-      xScale: 0.3,
-      yScale: 0.3,
+      xScale: 0.2,
+      yScale: 0.2,
     }],
     bowl: [{
       x: 100,
       y: 100,
-      xScale: 0.5,
-      yScale: 0.5,
+      xScale: 0.2,
+      yScale: 0.2,
     }],
     kennel: [{
       x: 100,
       y: 100,
-      xScale: 0.5,
-      yScale: 0.5,
+      xScale: 0.4,
+      yScale: 0.4,
     }],
     ball: [{
       x: 100,
       y: 100,
-      xScale: 0.5,
-      yScale: 0.5,
+      xScale: 0.4,
+      yScale: 0.4,
     }],
     bone: [{
       x: 100,
@@ -58,8 +61,8 @@ export default function Home() {
       x: 100,
       y: 100,
       r: 100,
-      xScale: 0.3,
-      yScale: 0.3,
+      xScale: 0.2,
+      yScale: 0.2,
     }],
     mediumDog: [{
       x: 100,
@@ -72,8 +75,8 @@ export default function Home() {
       x: 100,
       y: 100,
       r: 100,
-      xScale: 0.4,
-      yScale: 0.4,
+      xScale: 0.3,
+      yScale: 0.3,
     }]
   };
   const tabletShapeProps = {
@@ -201,6 +204,7 @@ export default function Home() {
 
   useEffect(() => {
     let grassHeight = document.getElementById('grass').offsetHeight;
+    let headerHeight = document.getElementById('header').offsetHeight;
 
     // module aliases
     let Engine = Matter.Engine;
@@ -255,13 +259,21 @@ export default function Home() {
           fillStyle: "#0000",
         }
       }),
-      Bodies.rectangle(window.innerWidth + 6, window.innerWidth / 2, 10, window.innerWidth, { isStatic: true }),
-      Bodies.rectangle(-6, window.innerWidth / 2, 10, window.innerWidth, { isStatic: true })
+      Bodies.rectangle(window.innerWidth + 6, window.innerWidth / 2, 10, window.innerWidth, {
+        isStatic: true, render: {
+          fillStyle: "#0000",
+        }
+      }),
+      Bodies.rectangle(-6, window.innerWidth / 2, 10, window.innerWidth, {
+        isStatic: true, render: {
+          fillStyle: "#0000",
+        }
+      })
     ]);
 
     // Composites.stack(x, y, columns, rows, columnGap, rowGap, callback)
-    var stack = Composites.stack((window.innerWidth / 10), 0, 8, 1, 20, 0, function (x, y, i) {
-      if (i === 1) {
+    var stack = Composites.stack((window.innerWidth / 10), 0, 10, 1, 10, 0, function (x, y, i) {
+      if (i === 0) {
         return Bodies.rectangle(x, y, desktopShapeProps.smallDog[0].x, desktopShapeProps.smallDog[0].y, {
           frictionStatic: 1,
           restitution: 0.9,
@@ -273,7 +285,43 @@ export default function Home() {
             }
           }
         })
+      } else if (i === 1) {
+        return Bodies.rectangle(x, y, desktopShapeProps.kennel[0].x, desktopShapeProps.kennel[0].y, {
+          frictionStatic: 1,
+          restitution: 0.3,
+          render: {
+            sprite: {
+              texture: "./kennel-paper.png",
+              xScale: desktopShapeProps.kennel[0].xScale,
+              yScale: desktopShapeProps.kennel[0].yScale
+            }
+          }
+        })
+      } else if (i === 2) {
+        return Bodies.rectangle(x, y, desktopShapeProps.bone[0].x, desktopShapeProps.bone[0].y, {
+          frictionStatic: 1,
+          restitution: 0.7,
+          render: {
+            sprite: {
+              texture: "./bone-paper2.png",
+              xScale: desktopShapeProps.bone[0].xScale,
+              yScale: desktopShapeProps.bone[0].yScale
+            }
+          }
+        })
       } else if (i === 3) {
+        return Bodies.rectangle(x, y, desktopShapeProps.flower[0].x, desktopShapeProps.flower[0].y, {
+          frictionStatic: 1,
+          restitution: 0.7,
+          render: {
+            sprite: {
+              texture: "./flower-paper.png",
+              xScale: desktopShapeProps.flower[0].xScale,
+              yScale: desktopShapeProps.flower[0].yScale
+            }
+          }
+        })
+      } else if (i === 4) {
         return Bodies.rectangle(x, y, desktopShapeProps.mediumDog[0].x, desktopShapeProps.mediumDog[0].y, {
           // friction: 0.8,
           frictionStatic: 1,
@@ -286,48 +334,8 @@ export default function Home() {
             }
           }
         })
-      } else if (i === 6) {
-        return Bodies.rectangle(x, y, desktopShapeProps.bigDog[0].x, desktopShapeProps.bigDog[0].y, {
-          // friction: 0.8,
-          frictionStatic: 1,
-          restitution: 0.4,
-          render: {
-            sprite: {
-              texture: "./bigDog-paper.png",
-              xScale: desktopShapeProps.bigDog[0].xScale,
-              yScale: desktopShapeProps.bigDog[0].yScale
-            }
-          }
-        })
       }
-      const randomNumber = Math.random()
-
-      if (randomNumber > 0.85) {
-        return Bodies.circle(x, y, desktopShapeProps.heart[0].r, {
-          frictionStatic: 1,
-          restitution: 0.7,
-          render: {
-            sprite: {
-              texture: "./heart-paper.png",
-              xScale: desktopShapeProps.heart[0].xScale,
-              yScale: desktopShapeProps.heart[0].yScale
-            }
-          }
-        })
-      } else if (randomNumber > 0.65) {
-        return Bodies.circle(x, y, desktopShapeProps.star[0].r, {
-          frictionStatic: 1,
-          restitution: 0.8,
-          render: {
-            sprite: {
-              texture: "./star-paper.png",
-              xScale: desktopShapeProps.star[0].xScale,
-              yScale: desktopShapeProps.star[0].yScale
-            }
-          }
-        })
-      }
-      else if (randomNumber > 0.45) {
+      else if (i === 5) {
         return Bodies.rectangle(x, y, desktopShapeProps.bowl[0].x, desktopShapeProps.bowl[0].y, {
           frictionStatic: 1,
           restitution: 0.7,
@@ -340,20 +348,20 @@ export default function Home() {
           }
         })
       }
-      else if (randomNumber > 0.25) {
-        return Bodies.rectangle(x, y, desktopShapeProps.kennel[0].x, desktopShapeProps.kennel[0].y, {
+      else if (i === 6) {
+        return Bodies.rectangle(x, y, desktopShapeProps.star[0].x, desktopShapeProps.star[0].y, {
           frictionStatic: 1,
-          restitution: 0.3,
+          restitution: 0.8,
           render: {
             sprite: {
-              texture: "./kennel-paper.png",
-              xScale: desktopShapeProps.kennel[0].xScale,
-              yScale: desktopShapeProps.kennel[0].yScale
+              texture: "./star-paper.png",
+              xScale: desktopShapeProps.star[0].xScale,
+              yScale: desktopShapeProps.star[0].yScale
             }
           }
         })
       }
-      else if (randomNumber > 0.15) {
+      else if (i === 7) {
         return Bodies.rectangle(x, y, desktopShapeProps.ball[0].x, desktopShapeProps.ball[0].y, {
           frictionStatic: 1,
           restitution: 0.3,
@@ -365,15 +373,28 @@ export default function Home() {
             }
           }
         })
+      } else if (i === 8) {
+        return Bodies.rectangle(x, y, desktopShapeProps.bigDog[0].x, desktopShapeProps.bigDog[0].y, {
+          // friction: 0.8,
+          frictionStatic: 1,
+          restitution: 0.4,
+          render: {
+            sprite: {
+              texture: "./bigDog-paper.png",
+              xScale: desktopShapeProps.bigDog[0].xScale,
+              yScale: desktopShapeProps.bigDog[0].yScale
+            }
+          }
+        })
       } else {
-        return Bodies.rectangle(x, y, desktopShapeProps.bone[0].x, desktopShapeProps.bone[0].y, {
+        return Bodies.rectangle(x, y, desktopShapeProps.heart[0].x, desktopShapeProps.heart[0].y, {
           frictionStatic: 1,
           restitution: 0.7,
           render: {
             sprite: {
-              texture: "./bone-paper2.png",
-              xScale: desktopShapeProps.bone[0].xScale,
-              yScale: desktopShapeProps.bone[0].yScale
+              texture: "./heart-paper.png",
+              xScale: desktopShapeProps.heart[0].xScale,
+              yScale: desktopShapeProps.heart[0].yScale
             }
           }
         })
@@ -400,30 +421,62 @@ export default function Home() {
     // keep the mouse in sync with rendering
     render.mouse = mouse;
 
-  }, [desktopShapeProps.bigDog, desktopShapeProps.bone, desktopShapeProps.bowl, desktopShapeProps.heart, desktopShapeProps.kennel, desktopShapeProps.mediumDog, desktopShapeProps.smallDog, desktopShapeProps.star]);
-
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-      updateCurrentDevice(window.innerWidth < 767 ? "mobile" : window.innerWidth < 1024 ? "tablet" : "desktop")
-    }
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [setWindowDimensions]);
+  }, [desktopShapeProps.ball, desktopShapeProps.bigDog, desktopShapeProps.bone, desktopShapeProps.bowl, desktopShapeProps.flower, desktopShapeProps.heart, desktopShapeProps.kennel, desktopShapeProps.mediumDog, desktopShapeProps.smallDog, desktopShapeProps.star]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen font-[family-name:var(--font-fredoka)]" style={{ height: "100vh" }}>
-      <main id="main" className="w-full h-full absolute">
-        {/* CANVAS */}
-        <div id="canvasContainer" ref={boxRef} className="w-full h-full">
-          <canvas ref={canvasRef} />
+    <>
+      <header id={"header"} className="gap-4 md:gap-7 flex flex-wrap absolute font-[family-name:var(--font-workSans)] m-4" style={{ zIndex: 100 }}>
+        <div className="bg-yellow hover:rotate-3 pt-1 pb-1 pl-3 pr-3">
+          <Link className="text-blue text-sm sm:text-l relative" href={"/"}>{`Bee's Knees Dog Walking`}</Link>
         </div>
-      </main >
-    </div >
+
+        <nav id="footer" className="gap-4 md:gap-7 flex flex-wrap text-sm sm:text-l font-[family-name:var(--font-workSans)]">
+
+          <div className="bg-purple hover:rotate-5 pt-1 pb-1 pl-3 pr-3">
+            <Link className="text-pink relative" href={"/info"}>{"Info"}</Link>
+          </div>
+
+          <div className="bg-green hover:rotate-5 pt-1 pb-1 pl-3 pr-3">
+            <Link className="text-yellow relative" href={"/contact"}>{"Contact"}</Link>
+          </div>
+
+          <div className="bg-pink hover:rotate-5 pt-1 pb-1 pl-3 pr-3">
+            <a
+              className="text-red relative"
+              href="https://www.instagram.com/beeskneesbyjo/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Follow
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <div className="flex flex-col items-center min-h-screen" style={{ height: "100vh" }}>
+        <main id="main" className="w-full h-full absolute">
+          {/* CANVAS */}
+          <div id="canvasContainer" ref={boxRef} className="w-full h-full">
+            <canvas ref={canvasRef} />
+          </div>
+        </main >
+      </div >
+
+      <NextImage
+        id="grass"
+        src={currentDevice === "mobile" ? "/grass-paper.png" : "/grass-paper2.png"}
+        style={{ bottom: "-2px" }}
+        className="absolute h-14 sm:h-auto w-full"
+        alt="grass"
+        width={1440}
+        height={120}
+        priority
+      />
+
+      <div className="absolute bottom-2 left-3 text-purple font-[family-name:var(--font-workSans)] font-bold">
+        <p className="text-xs">© Bee&apos;s Knees 2025</p>
+      </div>
+
+    </>
   );
 }
