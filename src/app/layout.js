@@ -37,13 +37,10 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      {/* font-[family-name:var(--font-pochaevsk)] */}
       <body
         className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`}
       >
-
         {children}
-
       </body>
     </html>
   );

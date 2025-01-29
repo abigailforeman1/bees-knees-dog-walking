@@ -13,7 +13,6 @@ const useWindowDimensions = () => {
   });
   const [currentDevice, updateCurrentDevice] = useState("desktop");
 
-
   useEffect(() => {
     function handleResize() {
       setWindowDimensions({
@@ -21,7 +20,6 @@ const useWindowDimensions = () => {
         height: window.innerHeight,
       });
       updateCurrentDevice(window.innerWidth < 767 ? "mobile" : window.innerWidth < 1024 ? "tablet" : "desktop")
-
     }
 
     handleResize();
