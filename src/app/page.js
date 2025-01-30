@@ -3,7 +3,6 @@ import { useRef, useEffect } from "react";
 import Matter from 'matter-js';
 import PolyDecomp from 'poly-decomp';
 import useWindowDimensions from "@/app/hooks/useWindowDimension";
-import NextImage from "next/image";
 
 export default function Home() {
   const { windowDimensions, currentDevice } = useWindowDimensions();
@@ -270,6 +269,7 @@ export default function Home() {
       }
     ];
     let grassHeight = document.getElementById('grass').offsetHeight;
+    let headerHeight = document.getElementById('header').offsetHeight;
 
     // module aliases
     let Engine = Matter.Engine;
@@ -296,7 +296,7 @@ export default function Home() {
       canvas: canvasRef.current,
       options: {
         width: window.innerWidth,
-        height: window.innerHeight,
+        height: window.innerHeight - headerHeight,
         background: 'inherit',
         wireframes: false,
       },
@@ -314,12 +314,12 @@ export default function Home() {
     // add bodies
     Composite.add(world, [
       // walls
-      Bodies.rectangle(window.innerWidth / 2, -6, window.innerWidth, 10, {
+      Bodies.rectangle(window.innerWidth / 2, 5, window.innerWidth, 10, {
         isStatic: true, render: {
           fillStyle: "#0000",
         }
       }),
-      Bodies.rectangle(window.innerWidth / 2, currentDevice === "mobile" ? window.innerHeight - grassHeight - 50 : window.innerHeight - grassHeight, window.innerWidth, 10, {
+      Bodies.rectangle(window.innerWidth / 2, window.innerHeight - grassHeight - 100, window.innerWidth, 10, {
         isStatic: true, render: {
           fillStyle: "#0000",
         }
@@ -667,33 +667,16 @@ export default function Home() {
   }, [currentDevice, windowDimensions]);
 
   return (
-    <div className="flex justify-center w-screen h-screen">
+    <div className="flex justify-center w-screen h-full">
 
-      <div className="flex flex-col items-center min-h-screen" style={{ height: "100vh" }}>
-        <main id="main" className="w-full h-full absolute">
+      <div className="flex flex-col items-center">
+        <main id="main" className="w-full h-full">
           {/* CANVAS */}
           <div id="canvasContainer" ref={boxRef} className="w-full h-full">
             <canvas ref={canvasRef} />
           </div>
         </main >
       </div >
-
-      <NextImage
-        id="grass"
-        src={currentDevice === "mobile" ? "/grass-paper.png" : "/grass-paper2.png"}
-        style={{ bottom: "-2px", height: "auto" }}
-        className="absolute w-screen"
-        alt="grass"
-        width={1440}
-        height={120}
-        priority
-      />
-
-      <p className="absolute bottom-1 left-3 text-purple font-[family-name:var(--font-workSans)] text-xs">© Bee&apos;s Knees 2025</p>
-      <a href={"https://www.studiosunne.com"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute bottom-1 right-3 text-purple font-[family-name:var(--font-workSans)] text-xs hover:text-yellow">Website by Studio Sunne</a>
     </div>
   );
 }
