@@ -20,11 +20,11 @@ export default {
       },
     },
     fontSize: {
-      xs: "11px",
-      sm: "26px",
-      base: '21px',
-      l: '33px',
-      xl: '60px',
+      xs: "9px",
+      sm: "16px",
+      base: '20px',
+      l: '26px',
+      xl: '33px',
       "2xl": "70px",
       "3xl": "90px"
     },
@@ -35,7 +35,7 @@ export default {
       '10': "10deg",
       '15': '15deg',
       '25': '25deg',
-    }
+    },
   },
   plugins: [
     require('tailwindcss-text-fill-stroke')(),

@@ -1,8 +1,13 @@
+'use client';
+import NextImage from "next/image";
+import useWindowDimensions from "@/app/hooks/useWindowDimension";
+
 export default function Page() {
+  const { currentDevice } = useWindowDimensions();
 
   return (
-    <div className="text-base flex flex-col justify-center items-center w-full" style={{ height: "100vh" }}>
-      <nav className="flex flex-col p-4 w-3/5 gap-4 justify-center text-purple font-[family-name:var(--font-workSans)]">
+    <div className="text-sm md:text-base flex flex-col justify-center items-center w-full" style={{ height: "100vh" }}>
+      <nav className="flex flex-col p-4 w-4/5 md:w-3/5 gap-4 justify-center text-purple font-[family-name:var(--font-workSans)]">
         <p>Please contact me{" "}
           <a
             className="underline hover:text-yellow"
@@ -27,6 +32,17 @@ export default function Page() {
           <p className="font-bold text-blue bg-purple p-2">Thank you!</p>
         </div>
       </nav>
+
+      <NextImage
+        id="grass"
+        src={currentDevice === "mobile" ? "/grass-paper.png" : "/grass-paper2.png"}
+        style={{ bottom: "-2px", height: "auto" }}
+        className="absolute w-screen"
+        alt="grass"
+        width={1440}
+        height={120}
+        priority
+      />
     </div>
   )
 }

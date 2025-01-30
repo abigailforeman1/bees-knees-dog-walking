@@ -3,6 +3,7 @@ import { Fredoka } from "next/font/google";
 import { Work_Sans } from "next/font/google";
 import { Adamina } from "next/font/google";
 import "./globals.css";
+import Link from 'next/link'
 
 const dongle = Dongle({
   variable: "--font-dongle",
@@ -40,8 +41,39 @@ export default function RootLayout({ children }) {
       <body
         className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`}
       >
+        <div className="flex justify-center w-screen">
+
+          <header id={"header"} className={`flex items-center flex-col md:flex-row absolute lg:left-0 gap-4 md:gap-7 font-[family-name:var(--font-workSans)] m-4`} style={{ zIndex: 100 }}>
+
+            <Link className="bg-yellow hover:rotate-3 pt-1 pb-1 pl-3 pr-3 w-[340px] lg:w-[425px]" href={"/"}>
+              <p className="text-blue text-l lg:text-xl relative">Bee&apos;s Knees Dog Walking</p>
+            </Link>
+
+            <nav id="footer" className="justify-between gap-4 lg:gap-7 flex flex-wrap text-l lg:text-xl font-[family-name:var(--font-workSans)] w-[340px] lg:w-[425px]">
+
+              <Link className="bg-purple hover:rotate-5 pt-1 pb-1 pl-3 pr-3" href={"/info"}>
+                <p className="text-pink relative">Info</p>
+              </Link>
+
+              <Link className="bg-green hover:rotate-5 pt-1 pb-1 pl-3 pr-3" href={"/contact"}>
+                <p className="text-yellow relative">Contact</p>
+              </Link>
+
+              <Link
+                href={"https://www.instagram.com/beeskneesbyjo/"}
+                className="bg-pink hover:rotate-5 pt-1 pb-1 pl-3 pr-3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <p className="text-red relative"
+                >Follow</p>
+              </Link>
+
+            </nav>
+          </header>
+        </div>
         {children}
       </body>
-    </html>
+    </html >
   );
 }
