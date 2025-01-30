@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
           <header id={"header"} className={`flex items-center flex-col md:flex-row absolute lg:left-0 gap-4 md:gap-7 font-[family-name:var(--font-workSans)] m-4`} style={{ zIndex: 100 }}>
 
             <Link className="bg-yellow hover:rotate-3 pt-1 pb-1 pl-3 pr-3 w-[340px] lg:w-[425px]" href={"/"}>
-              <p className="text-blue text-l lg:text-xl relative">Bee&apos;s Knees Dog Walking</p>
+              <p className="text-blueDark text-l lg:text-xl relative">Bee&apos;s Knees Dog Walking</p>
             </Link>
 
             <nav id="footer" className="justify-between gap-4 lg:gap-7 flex flex-wrap text-l lg:text-xl font-[family-name:var(--font-workSans)] w-[340px] lg:w-[425px]">

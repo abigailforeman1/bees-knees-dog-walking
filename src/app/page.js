@@ -689,11 +689,11 @@ export default function Home() {
         priority
       />
 
-      <p className="absolute bottom-1 left-3 text-purple font-[family-name:var(--font-workSans)] font-bold text-xs">© Bee&apos;s Knees 2025</p>
+      <p className="absolute bottom-1 left-3 text-purple font-[family-name:var(--font-workSans)] text-xs">© Bee&apos;s Knees 2025</p>
       <a href={"https://www.studiosunne.com"}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute bottom-1 right-3 text-purple font-[family-name:var(--font-workSans)] font-bold text-xs hover:text-yellow">Website by Studio Sunne</a>
+        className="absolute bottom-1 right-3 text-purple font-[family-name:var(--font-workSans)] text-xs hover:text-yellow">Website by Studio Sunne</a>
     </div>
   );
 }

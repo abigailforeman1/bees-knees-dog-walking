@@ -12,6 +12,7 @@ export default {
         foreground: "var(--foreground)",
         green: "#50B175",
         blue: "#9DCBFF",
+        blueDark: "#5aa7ff",
         red: "#e84242",
         orange: "#FF7335",
         pink: "#FCB0A6",
