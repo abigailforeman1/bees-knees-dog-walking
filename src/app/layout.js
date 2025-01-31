@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`}
       >
+
         <div className="flex flex-col">
           <header id={"header"} className={`w-screen absolute flex items-center flex-col md:flex-row gap-4 md:gap-7 font-[family-name:var(--font-workSans)] mt-5 md:m-4`} style={{ zIndex: 100 }}>
 

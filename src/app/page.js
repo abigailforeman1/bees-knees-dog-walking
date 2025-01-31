@@ -3,14 +3,27 @@ import { useRef, useEffect } from "react";
 import Matter from 'matter-js';
 import PolyDecomp from 'poly-decomp';
 import useWindowDimensions from "@/app/hooks/useWindowDimension";
+import { gsap } from 'gsap/dist/gsap';
+import { useGSAP } from '@gsap/react';
+import NextImage from "next/image";
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(useGSAP);
+}
 
 export default function Home() {
   const { windowDimensions, currentDevice } = useWindowDimensions();
-  // console.log(currentDevice);
   const boxRef = useRef(null);
   const canvasRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
+    const tlBeeOne = gsap.timeline({ paused: true });
+    tlBeeOne.to('#bee', { x: windowDimensions.width + 70, duration: 9, ease: "none" }, "animation-1")
+    tlBeeOne.to('#bee', { y: 100, duration: 2, ease: "power1.inOut" }, "animation-1+=1")
+    tlBeeOne.to('#bee', { y: 50, duration: 1, ease: "power1.inOut" }, "animation-1+=3")
+    tlBeeOne.to('#bee', { y: 200, duration: 3, ease: "power1.inOut" }, "animation-1+=4")
+    tlBeeOne.to('#bee', { y: 150, duration: 2, ease: "power1.inOut" }, "animation-1+=7")
+
     const shapeProps = [
       {
         device: "desktop",
@@ -269,7 +282,7 @@ export default function Home() {
       }
     ];
     let grassHeight = document.getElementById('grass').offsetHeight;
-    let headerHeight = document.getElementById('header').offsetHeight;
+    // let headerHeight = document.getElementById('header').offsetHeight;
 
     // module aliases
     let Engine = Matter.Engine;
@@ -335,6 +348,9 @@ export default function Home() {
         }
       })
     ]);
+
+    // create gsap timeline
+    const tlShapes = gsap.timeline();
 
     if (currentDevice === "desktop" || currentDevice === "tablet") {
       // Composites.stack(x, y, columns, rows, columnGap, rowGap, callback)
@@ -475,7 +491,7 @@ export default function Home() {
           })
         }
       });
-      Composite.add(engine.world, stack);
+      tlShapes.add(function () { Composite.add(engine.world, stack) }, "animation-1+=1");
     } else {
       var stackLoop = 1;
       // Composites.stack(x, y, columns, rows, columnGap, rowGap, callback)
@@ -643,7 +659,8 @@ export default function Home() {
           })
         }
       });
-      Composite.add(engine.world, stackMobile);
+      tlShapes.add(function () { Composite.add(engine.world, stackMobile) }, "animation-1+=1");
+      tlShapes.add(function () { tlBeeOne.play() }, "animation-1+=5");
     }
 
     // add mouse control
@@ -658,20 +675,33 @@ export default function Home() {
         }
       });
 
-    // add all of the bodies to the world
+    // add mouse constraints to the world
     Composite.add(engine.world, mouseConstraint);
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
 
-  }, [currentDevice, windowDimensions]);
+  }, [windowDimensions, currentDevice]);
 
   return (
-    <main id="main">
-      {/* CANVAS */}
-      <div id="canvasContainer" ref={boxRef} className="w-screen h-screen">
-        <canvas ref={canvasRef} />
-      </div>
-    </main >
+    <>
+      <NextImage
+        id="bee"
+        src={"/bee-paper.png"}
+        className="absolute top-20 left-[-70px]"
+        style={{ zIndex: 101 }}
+        alt="bee"
+        width={60}
+        height={0}
+        priority
+      />
+
+      <main id="main">
+        {/* CANVAS */}
+        <div id="canvasContainer" ref={boxRef} className="w-screen h-screen">
+          <canvas ref={canvasRef} />
+        </div>
+      </main >
+    </>
   );
 }
