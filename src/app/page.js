@@ -296,7 +296,7 @@ export default function Home() {
       canvas: canvasRef.current,
       options: {
         width: window.innerWidth,
-        height: window.innerHeight - headerHeight,
+        height: window.innerHeight,
         background: 'inherit',
         wireframes: false,
       },
@@ -319,7 +319,7 @@ export default function Home() {
           fillStyle: "#0000",
         }
       }),
-      Bodies.rectangle(window.innerWidth / 2, window.innerHeight - grassHeight - 100, window.innerWidth, 10, {
+      Bodies.rectangle(window.innerWidth / 2, window.innerHeight - grassHeight, window.innerWidth, 10, {
         isStatic: true, render: {
           fillStyle: "#0000",
         }
@@ -667,16 +667,11 @@ export default function Home() {
   }, [currentDevice, windowDimensions]);
 
   return (
-    <div className="flex justify-center w-screen h-full">
-
-      <div className="flex flex-col items-center">
-        <main id="main" className="w-full h-full">
-          {/* CANVAS */}
-          <div id="canvasContainer" ref={boxRef} className="w-full h-full">
-            <canvas ref={canvasRef} />
-          </div>
-        </main >
-      </div >
-    </div>
+    <main id="main">
+      {/* CANVAS */}
+      <div id="canvasContainer" ref={boxRef} className="w-screen h-screen">
+        <canvas ref={canvasRef} />
+      </div>
+    </main >
   );
 }
