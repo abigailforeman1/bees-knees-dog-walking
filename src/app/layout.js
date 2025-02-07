@@ -37,9 +37,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-blue" style={{
-      backgroundImage: `url('/background-paper.png')`
-    }}>
+    <html lang="en" className="bg-blue">
       <body
         className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`}  style={{
           backgroundImage: `url('/background-paper.png')`
