@@ -17,7 +17,7 @@ export default function Home() {
   const canvasRef = useRef(null);
 
   useGSAP(() => {
-    const tlBeeOne = gsap.timeline({ paused: true });
+    const tlBeeOne = gsap.timeline({ paused: true, repeat: -1, yoyo: false, repeatDelay: 7 });
     tlBeeOne.startTime(5);
     tlBeeOne.to('#bee', { left: windowDimensions.width + 70, duration: 10, ease: "none" }, "animation-2")
     tlBeeOne.to('#bee', { y: 100, duration: 2, ease: "power1.inOut" }, "animation-2+=1")

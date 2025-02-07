@@ -12,7 +12,7 @@ export default function Page() {
   const { windowDimensions, currentDevice } = useWindowDimensions();
 
   useGSAP(() => {
-    const tlBeeTwo = gsap.timeline({ paused: false });
+    const tlBeeTwo = gsap.timeline({ paused: false, repeat: -1, repeatDelay: 7 });
     tlBeeTwo.startTime(3);
     tlBeeTwo.to('#bee', { right: windowDimensions.width + 70, duration: 9, ease: "none" }, "animation-3")
     tlBeeTwo.to('#bee', { y: -100, duration: 2, ease: "power1.inOut" }, "animation-3+=1")
