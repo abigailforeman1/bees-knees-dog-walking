@@ -33,7 +33,7 @@ export default function Page() {
         height={0}
         priority
       />
-      <div className="text-sm md:text-base flex flex-col justify-center items-center w-full h-full mt-[180px] md:mt-[150px]">
+      <div className="text-sm md:text-base flex flex-col justify-center items-center w-full h-full mt-[180px] md:mt-[0px] md:h-screen">
         <div className="flex flex-col p-4 w-4/5 md:w-3/5 gap-6 justify-center text-purple font-[family-name:var(--font-workSans)]">
           <p>Please contact me{" "}
             <a

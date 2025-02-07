@@ -5,7 +5,7 @@ import useWindowDimensions from "@/app/hooks/useWindowDimension";
 export default function Page() {
   const { currentDevice } = useWindowDimensions();
   return (
-    <div className="flex justify-center items-center w-full h-full mb-[10px] md:mb-[150px] mt-[180px] md:mt-[120px]">
+    <div className="flex justify-center items-center w-full h-full mb-[10px] md:mb-[0px] mt-[180px] md:mt-[0px] md:h-screen">
       <div className="flex flex-col md:flex-row items-center justify-center h-full w-full md:w-3/4 gap-7">
 
         <div className="flex flex-col align-center w-3/4 text-purple text-sm md:text-base font-[family-name:var(--font-workSans)]"><p className="mb-1">Hi, I’m Jo.</p>
