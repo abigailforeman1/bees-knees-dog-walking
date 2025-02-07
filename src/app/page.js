@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Matter from 'matter-js';
 import PolyDecomp from 'poly-decomp';
 import useWindowDimensions from "@/app/hooks/useWindowDimension";
