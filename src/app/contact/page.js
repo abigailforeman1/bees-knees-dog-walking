@@ -14,8 +14,11 @@ export default function Page() {
   useGSAP(() => {
     const tlBeeTwo = gsap.timeline({ paused: false });
     tlBeeTwo.startTime(3);
-    tlBeeTwo.to('#bee', { top: 70, duration: 6, ease: "none" }, "animation-1")
-    tlBeeTwo.to('#bee', { left: -70, duration: 6, ease: "power1.inOut" }, "animation-1")
+    tlBeeTwo.to('#bee', { right: windowDimensions.width + 70, duration: 9, ease: "none" }, "animation-3")
+    tlBeeTwo.to('#bee', { y: -100, duration: 2, ease: "power1.inOut" }, "animation-3+=1")
+    tlBeeTwo.to('#bee', { y: -50, duration: 1, ease: "power1.inOut" }, "animation-3+=3")
+    tlBeeTwo.to('#bee', { y: -300, duration: 3, ease: "power1.inOut" }, "animation-3+=4")
+    tlBeeTwo.to('#bee', { y: -150, duration: 2, ease: "power1.inOut" }, "animation-3+=7")
   }, [windowDimensions, currentDevice]);
 
   return (
@@ -26,7 +29,7 @@ export default function Page() {
         className="absolute bottom-20 right-[-70px] scale-x-[-1]"
         style={{ zIndex: 101 }}
         alt="bee"
-        width={60}
+        width={70}
         height={0}
         priority
       />

@@ -18,11 +18,12 @@ export default function Home() {
 
   useGSAP(() => {
     const tlBeeOne = gsap.timeline({ paused: true });
-    tlBeeOne.to('#bee', { x: windowDimensions.width + 70, duration: 9, ease: "none" }, "animation-1")
-    tlBeeOne.to('#bee', { y: 100, duration: 2, ease: "power1.inOut" }, "animation-1+=1")
-    tlBeeOne.to('#bee', { y: 50, duration: 1, ease: "power1.inOut" }, "animation-1+=3")
-    tlBeeOne.to('#bee', { y: 200, duration: 3, ease: "power1.inOut" }, "animation-1+=4")
-    tlBeeOne.to('#bee', { y: 150, duration: 2, ease: "power1.inOut" }, "animation-1+=7")
+    tlBeeOne.startTime(5);
+    tlBeeOne.to('#bee', { left: windowDimensions.width + 70, duration: 10, ease: "none" }, "animation-2")
+    tlBeeOne.to('#bee', { y: 100, duration: 2, ease: "power1.inOut" }, "animation-2+=1")
+    tlBeeOne.to('#bee', { y: 50, duration: 1, ease: "power1.inOut" }, "animation-2+=3")
+    tlBeeOne.to('#bee', { y: 200, duration: 3, ease: "power1.inOut" }, "animation-2+=4")
+    tlBeeOne.to('#bee', { y: 150, duration: 2, ease: "power1.inOut" }, "animation-2+=7")
 
     const shapeProps = [
       {
@@ -492,6 +493,7 @@ export default function Home() {
         }
       });
       tlShapes.add(function () { Composite.add(engine.world, stack) }, "animation-1+=1");
+      tlShapes.add(function () { tlBeeOne.play() }, "animation-1+=5");
     } else {
       var stackLoop = 1;
       // Composites.stack(x, y, columns, rows, columnGap, rowGap, callback)
@@ -691,7 +693,7 @@ export default function Home() {
         className="absolute top-20 left-[-70px]"
         style={{ zIndex: 101 }}
         alt="bee"
-        width={60}
+        width={70}
         height={0}
         priority
       />

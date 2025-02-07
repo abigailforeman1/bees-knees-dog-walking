@@ -39,7 +39,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`}
+        className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`} style={{
+          backgroundImage: `url('/background-paper.png')`,
+        }}
       >
 
         <div className="flex flex-col">
