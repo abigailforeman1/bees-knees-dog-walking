@@ -200,7 +200,7 @@ export default function Home() {
       },
       {
         device: "mobile",
-        shapesTotalWidth: 380,
+        shapesTotalWidth: 370,
         shapes: {
           heart: [{
             x: 100,
@@ -275,8 +275,8 @@ export default function Home() {
             restitution: 0.1,
           }],
           flower: [{
-            x: 80,
-            y: 80,
+            x: 70,
+            y: 70,
             xScale: 0.2,
             yScale: 0.2,
             frictionStatic: 10,
