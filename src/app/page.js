@@ -28,6 +28,7 @@ export default function Home() {
     const shapeProps = [
       {
         device: "desktop",
+        shapesTotalWidth: 1020,
         shapes: {
           heart: [{
             x: 90,
@@ -113,6 +114,7 @@ export default function Home() {
       },
       {
         device: "tablet",
+        shapesTotalWidth: 750,
         shapes: {
           heart: [{
             x: 80,
@@ -198,6 +200,7 @@ export default function Home() {
       },
       {
         device: "mobile",
+        shapesTotalWidth: 390,
         shapes: {
           heart: [{
             x: 100,
@@ -355,7 +358,7 @@ export default function Home() {
 
     if (currentDevice === "desktop" || currentDevice === "tablet") {
       // Composites.stack(x, y, columns, rows, columnGap, rowGap, callback)
-      var stack = Composites.stack((window.innerWidth / 11), 0, 10, 1, 10, 0, function (x, y, i) {
+      var stack = Composites.stack((window.innerWidth / 2) - shapeProps.filter((e) => e.device === currentDevice)[0].shapesTotalWidth / 2, 0, 10, 1, 10, 0, function (x, y, i) {
         if (i === 0) {
           let correctShape = shapeProps.filter((e) => e.device === currentDevice)[0].shapes.smallDog[0]
           return Bodies.rectangle(x, y, correctShape.x, correctShape.y, {
