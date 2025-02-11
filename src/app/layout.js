@@ -5,6 +5,7 @@ import { Adamina } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link'
 import NextImage from "next/image";
+import Script from "next/script";
 
 const dongle = Dongle({
   variable: "--font-dongle",
@@ -38,8 +39,24 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-blue">
+      <head>
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
+
+        <Script id="google-analytics">
+          {`    
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', "${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}");
+          `}
+        </Script>
+      </head>
+
       <body
-        className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`}  style={{
+        className={`${dongle.variable} ${workSans.variable} ${fredoka.variable} ${adamina.variable} antialiased bg-blue`} style={{
           backgroundImage: `url('/background-paper.png')`
         }}
       >
