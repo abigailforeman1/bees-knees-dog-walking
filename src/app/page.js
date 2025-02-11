@@ -316,6 +316,7 @@ export default function Home() {
         height: window.innerHeight,
         background: 'inherit',
         wireframes: false,
+        pixelRatio: 2,
       },
     });
 
