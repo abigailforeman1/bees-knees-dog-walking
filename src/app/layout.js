@@ -104,11 +104,11 @@ export default function RootLayout({ children }) {
           height={120}
           priority
         />
-        <p className="fixed bottom-1 left-3 text-purple font-bold font-[family-name:var(--font-workSans)] text-xs">© Bee&apos;s Knees 2025</p>
+        <p className="fixed bottom-1 left-3 text-purple font-normal md:font-bold font-[family-name:var(--font-workSans)] text-xs">© Bee&apos;s Knees 2025</p>
         <a href={"https://www.studiosunne.com"}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-1 right-3 text-purple font-bold font-[family-name:var(--font-workSans)] text-xs hover:text-yellow">Website by Studio Sunne</a>
+          className="fixed bottom-1 right-3 text-purple font-normal md:font-bold font-[family-name:var(--font-workSans)] text-xs hover:text-yellow">Website by Studio Sunne</a>
 
       </body>
     </html >
