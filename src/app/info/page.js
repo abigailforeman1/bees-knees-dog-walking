@@ -2,6 +2,18 @@
 import NextImage from "next/image";
 import useWindowDimensions from "@/app/hooks/useWindowDimension";
 
+export async function generateMetadata() {
+	return {
+    title: "Bee's Knees Dog Walking - Info page",
+    description: "Bee's Knees Dog Walking provides walking and home visits for all pets in the Medway towns and surrounding areas. Enquire today for professional and friendly dog walking services.",
+    openGraph: {
+      title: "Bee's Knees Dog Walking",
+      description: "Bee's Knees Dog Walking provides walking and home visits for all pets in the Medway towns and surrounding areas. Enquire today for professional and friendly dog walking services.",
+      images: ['/profilePicture.png'],
+    },
+	}
+}
+
 export default function Page() {
   const { currentDevice } = useWindowDimensions();
   return (

@@ -3,10 +3,21 @@ import NextImage from "next/image";
 import { gsap } from 'gsap/dist/gsap';
 import { useGSAP } from '@gsap/react';
 import useWindowDimensions from "@/app/hooks/useWindowDimension";
-import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(useGSAP);
+}
+
+export async function generateMetadata() {
+	return {
+    title: "Bee's Knees Dog Walking - Contact page",
+    description: "Bee's Knees Dog Walking provides walking and home visits for all pets in the Medway towns and surrounding areas. Enquire today for professional and friendly dog walking services.",
+    openGraph: {
+      title: "Bee's Knees Dog Walking",
+      description: "Bee's Knees Dog Walking provides walking and home visits for all pets in the Medway towns and surrounding areas. Enquire today for professional and friendly dog walking services.",
+      images: ['/mediumDog-paper.png'],
+    },
+	}
 }
 
 export default function Page() {
@@ -45,10 +56,10 @@ export default function Page() {
             >via Instagram</a>{" "}
             and include the following in your message:</p>
           <ul className="font-bold">
-            <li>▪︎ Your name</li>
-            <li>▪︎ Breed of your dog</li>
-            <li>▪︎ Your location</li>
-            <li>▪︎ Dates and times you would like to book me</li>
+            <li className="mb-1">▪︎ Your name</li>
+            <li className="mb-1">▪︎ Breed and name of your dog</li>
+            <li className="mb-1">▪︎ Your location</li>
+            <li>▪︎ Dates and times for booking</li>
           </ul>
           <p>I will then review your request and get back to you as soon as possible.</p>
           <div className="flex justify-start w-full">
