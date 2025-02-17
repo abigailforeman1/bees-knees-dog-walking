@@ -8,18 +8,6 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(useGSAP);
 }
 
-export async function generateMetadata() {
-	return {
-    title: "Bee's Knees Dog Walking - Contact page",
-    description: "Bee's Knees Dog Walking provides walking and home visits for all pets in the Medway towns and surrounding areas. Enquire today for professional and friendly dog walking services.",
-    openGraph: {
-      title: "Bee's Knees Dog Walking",
-      description: "Bee's Knees Dog Walking provides walking and home visits for all pets in the Medway towns and surrounding areas. Enquire today for professional and friendly dog walking services.",
-      images: ['/mediumDog-paper.png'],
-    },
-	}
-}
-
 export default function Page() {
   const { windowDimensions, currentDevice } = useWindowDimensions();
 
