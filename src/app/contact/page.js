@@ -3,6 +3,7 @@ import NextImage from "next/image";
 import { gsap } from 'gsap/dist/gsap';
 import { useGSAP } from '@gsap/react';
 import useWindowDimensions from "@/app/hooks/useWindowDimension";
+import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(useGSAP);
@@ -26,14 +27,14 @@ export default function Page() {
       <NextImage
         id="bee"
         src={"/bee-paper.png"}
-        className="absolute bottom-20 right-[-70px] scale-x-[-1]"
+        className="fixed bottom-20 right-[-70px] scale-x-[-1]"
         style={{ zIndex: 101 }}
         alt="bee"
         width={70}
         height={0}
         priority
       />
-      <div className="text-sm md:text-base flex flex-col justify-center items-center w-full h-full mt-[180px] md:mt-[0px] md:h-screen">
+      <div className="text-sm md:text-base flex flex-col justify-center items-center w-full mt-[0px] h-screen">
         <div className="flex flex-col p-4 w-4/5 md:w-3/5 gap-6 justify-center text-purple font-[family-name:var(--font-workSans)]">
           <p>Please contact me{" "}
             <a
@@ -42,13 +43,7 @@ export default function Page() {
               target="_blank"
               rel="noopener noreferrer"
             >via Instagram</a>{" "}
-            or by sending me an{" "}
-            <a
-              className="underline hover:text-yellow"
-              href="mailto:willowweebs1963@icloud.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >email</a>{" "}and include the following in your message:</p>
+            and include the following in your message:</p>
           <ul className="font-bold">
             <li>▪︎ Your name</li>
             <li>▪︎ Breed of your dog</li>
