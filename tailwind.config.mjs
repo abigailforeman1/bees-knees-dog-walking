@@ -38,7 +38,4 @@ export default {
       '25': '25deg',
     },
   },
-  plugins: [
-    require('tailwindcss-text-fill-stroke')(),
-  ],
 };

@@ -698,7 +698,7 @@ export default function Home() {
         alt="bee"
         width={70}
         height={0}
-        priority
+        // priority
       />
 
       <main id="main">

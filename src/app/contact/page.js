@@ -31,7 +31,7 @@ export default function Page() {
         alt="bee"
         width={70}
         height={0}
-        priority
+        // priority
       />
       <div className="text-sm md:text-base flex flex-col justify-center items-center w-full mt-[0px] h-screen">
         <div className="flex flex-col p-4 w-4/5 md:w-3/5 gap-6 justify-center text-purple font-[family-name:var(--font-workSans)]">
