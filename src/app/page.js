@@ -286,7 +286,6 @@ export default function Home() {
       }
     ];
     let grassHeight = document.getElementById('grass').offsetHeight;
-    // let headerHeight = document.getElementById('header').offsetHeight;
 
     // module aliases
     let Engine = Matter.Engine;
