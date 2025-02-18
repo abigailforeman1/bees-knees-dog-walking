@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: "Bee's Knees Dog Walking",
     description: "Bee's Knees Dog Walking provides walking and home visits for all pets in the Medway towns and surrounding areas. Enquire today for professional and friendly dog walking services.",
-    images: ['/mediumDog-paper.png'],
+    images: ['/bee-thumbnail.png'],
   },
 };
 
