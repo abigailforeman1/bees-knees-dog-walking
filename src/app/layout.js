@@ -188,7 +188,7 @@ export default function RootLayout({ children }) {
           className="fixed bottom-1 right-3 text-purple font-normal md:font-bold font-[family-name:var(--font-workSans)] text-xs hover:text-yellow">Website by Studio Sunne</a>
 
       </body>
-      <GoogleAnalytics gaId={`${process.env.GTM_ID}`} />
+      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
     </html >
   );
 }
