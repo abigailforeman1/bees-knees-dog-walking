@@ -23,10 +23,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-blue">
-      <head>
-      <GoogleAnalytics gaId={`${process.env.GTM_ID}`} />
-      </head>
-
       <body
         className={`${workSans.variable} antialiased bg-blue`} style={{
           backgroundImage: `url('/background-paper.png')`
@@ -192,6 +188,7 @@ export default function RootLayout({ children }) {
           className="fixed bottom-1 right-3 text-purple font-normal md:font-bold font-[family-name:var(--font-workSans)] text-xs hover:text-yellow">Website by Studio Sunne</a>
 
       </body>
+      <GoogleAnalytics gaId={`${process.env.GTM_ID}`} />
     </html >
   );
 }
