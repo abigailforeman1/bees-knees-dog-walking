@@ -2,7 +2,7 @@ import "./globals.css";
 import { Work_Sans } from "next/font/google";
 import Link from 'next/link'
 import NextImage from "next/image";
-import Script from "next/script";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const workSans = Work_Sans({
   variable: "--font-workSans",
@@ -24,19 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-blue">
       <head>
-        <Script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GTM_ID}`}
-        />
-
-        <Script id="google-analytics">
-          {`    
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', "${process.env.GTM_ID}");
-          `}
-        </Script>
+        <GoogleTagManager gtmId={`${process.env.GTM_ID}`} />
       </head>
 
       <body
