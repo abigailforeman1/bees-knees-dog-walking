@@ -2,7 +2,7 @@ import "./globals.css";
 import { Work_Sans } from "next/font/google";
 import Link from 'next/link'
 import NextImage from "next/image";
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const workSans = Work_Sans({
   variable: "--font-workSans",
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-blue">
       <head>
-        <GoogleTagManager gtmId={`${process.env.GTM_ID}`} />
+      <GoogleAnalytics gaId={`${process.env.GTM_ID}`} />
       </head>
 
       <body
